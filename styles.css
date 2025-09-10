@@ -1,0 +1,56 @@
+* { box-sizing: border-box; }
+:root {
+  --bg: #000; --fg: #fff; --muted: #9ca3af; --card: #0a0a0a; --border: #111;
+  --brand: #4ade80; --danger: #ef4444; --shadow: 0 4px 16px rgba(0,0,0,.25);
+  --space: 6px; --radius: 10px; --chip-pad: 6px;
+  --bar: #1f2937; --barOk: #22c55e; --barWarn: #f59e0b; --barOver: #ef4444;
+}
+:root[data-theme="light"] { --bg:#f7f7f7; --fg:#0a0a0a; --muted:#6b7280; --card:#fff; --border:#e5e7eb; --shadow:0 4px 14px rgba(0,0,0,.06); --bar:#e5e7eb; }
+html, body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,system-ui,sans-serif; }
+.mono { font-variant-numeric: tabular-nums; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+body { min-height:100svh; display:flex; flex-direction:column; overflow-x:hidden; touch-action:manipulation; }
+main#view { flex:1; padding:var(--space); padding-bottom:calc(88px + env(safe-area-inset-bottom)); }
+.screen { display:none; } .screen.active { display:block; }
+
+.card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:var(--space); box-shadow:var(--shadow); margin-bottom:var(--space); }
+.row{display:grid; grid-template-columns:96px 1fr; gap:6px; align-items:center; margin-top:6px;}
+.row.compact{grid-template-columns:1fr 1fr;}
+.row span, .row label { font-size:12px; color:var(--muted); }
+.row-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;}
+.grid.two{display:grid; grid-template-columns:1fr; gap:var(--space);}
+input, select, textarea, button { font:inherit; }
+input, select, textarea { width:100%; background:transparent; color:var(--fg); border:1px solid var(--border); border-radius:9px; padding:7px 9px; height:32px; }
+textarea{height:auto;}
+.primary{background:var(--brand); border:none; color:#000; font-weight:700; padding:8px 12px; border-radius:999px;}
+button{background:transparent; color:var(--fg); border:1px solid var(--border); padding:6px 10px; border-radius:999px;}
+button.ghost{background:transparent;}
+button.danger{background:var(--danger); color:#fff; border:none; padding:6px 10px; border-radius:9px;}
+h1,h2,h3{margin:0 0 4px;} p{margin:0 0 4px;}
+
+/* Chips */
+.chips{display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:6px;}
+.chips>div{border:1px solid var(--border); border-radius:9px; padding:var(--chip-pad); display:flex; flex-direction:column; gap:2px;}
+.chips strong{font-size:14px;}
+
+/* Quick add inline */
+.qadd{display:grid; grid-template-columns:0.6fr 0.8fr 1fr 1fr auto; gap:6px;}
+.qadd input, .qadd select{height:32px;}
+
+/* Lists */
+.list{list-style:none; padding:0; margin:0;} .list li{display:grid; grid-template-columns:1fr auto; align-items:center; gap:6px; padding:6px 2px; border-bottom:1px solid var(--border);}
+.list.tight li{padding:5px 2px;} .list.ultra li{padding:4px 2px;}
+.badge{font-size:12px; padding:2px 8px; border-radius:999px; background:transparent; color:var(--muted); border:1px solid var(--border); width:fit-content;}
+.meta{display:flex; gap:6px; font-size:12px; color:var(--muted);} .amount{font-weight:600;} .pos{color:#16a34a;} .neg{color:#ef4444;}
+
+/* Bars */
+.bar{height:6px; background:var(--bar); border-radius:999px; overflow:hidden;}
+.bar .fill{height:100%; width:0%; background:var(--barOk); transition:width .2s;}
+.bar.warn .fill{background:var(--barWarn);} .bar.over .fill{background:var(--barOver);}
+.budget-row{display:grid; grid-template-columns:1fr auto; align-items:center; gap:6px;}
+.budget-meta{display:flex; gap:6px; font-size:12px; color:var(--muted);}
+
+/* Two-row tab bar (6 buttons) */
+.tabbar{position:fixed; left:0; right:0; bottom:0; background:rgba(10,10,10,.96); border-top:1px solid var(--border); display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:minmax(34px,auto); padding:2px 0; gap:0; padding-bottom:calc(2px + env(safe-area-inset-bottom)); z-index:30;}
+:root[data-theme="light"] .tabbar{background:rgba(255,255,255,.96);}
+.tabbar button{border:none; padding:2px 0; display:flex; flex-direction:column; gap:0; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent; font-size:12px;}
+.tabbar button span{font-size:10px; color:var(--muted);} .tabbar button.active{color:var(--brand);} .tabbar button.active span{color:var(--brand);}
