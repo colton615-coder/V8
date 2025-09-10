@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Colt App">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png"><link rel="manifest" href="manifest.webmanifest">
+<title>Colt App — iOS PWA</title><link rel="stylesheet" href="styles.css"></head>
+<body><main id="view" role="main" aria-live="polite">
+<section id="home" class="screen active" aria-label="Home">
+  <div class="chips">
+    <div><span class="muted">Income</span><strong id="homeIncome" class="mono">$0.00</strong></div>
+    <div><span class="muted">Expenses</span><strong id="homeExpenses" class="mono">$0.00</strong></div>
+    <div><span class="muted">Net</span><strong id="homeNet" class="mono">$0.00</strong></div>
+  </div>
+  <div class="group"><div class="row-head"><h3>Recent</h3><button class="ghost" type="button" data-screen="ledger">All →</button></div>
+  <ul id="recentList" class="list ultra"></ul></div>
+</section>
+<section id="add" class="screen" aria-label="Add">
+  <div class="group"><form id="quickForm" class="strip" autocomplete="off">
+    <select name="type"><option value="expense">−</option><option value="income">+</option></select>
+    <input type="number" step="0.01" inputmode="decimal" name="amount" placeholder="$" required>
+    <input name="category" list="catList" placeholder="Category" required>
+    <input name="note" placeholder="Note"><button class="primary" type="submit">Add</button></form></div>
+</section>
+<section id="ledger" class="screen" aria-label="Ledger"><ul id="txList" class="list ultra group"></ul></section>
+<section id="budgets" class="screen" aria-label="Budgets">
+  <div class="group"><form id="budgetCatForm" class="strip" autocomplete="off">
+    <input name="cat" list="catList" placeholder="Category" required>
+    <input name="amt" type="number" step="0.01" inputmode="decimal" placeholder="Budget" required>
+    <button class="primary" type="submit">Save</button></form></div>
+  <ul id="catBudgetsList" class="list ultra group"></ul>
+</section>
+<section id="stats" class="screen" aria-label="Stats">
+  <div class="group"><canvas id="chart" width="400" height="150" role="img"></canvas>
+  <div class="mini"><label>Budget</label><input id="budgetGoal" type="number" inputmode="decimal" step="0.01"><span class="spacer"></span>
+  <span class="muted">Effective</span><strong id="sumEffective" class="mono">$0.00</strong>
+  <span class="muted">Spent</span><strong id="sumSpent" class="mono">$0.00</strong></div></div>
+</section>
+<section id="recurring" class="screen" aria-label="Recurring">
+  <div class="group"><form id="recForm" class="strip" autocomplete="off">
+    <select name="type"><option value="expense">−</option><option value="income">+</option></select>
+    <input name="amount" type="number" step="0.01" inputmode="decimal" placeholder="$" required>
+    <input name="category" list="catList" placeholder="Category" required>
+    <select name="cadence"><option>weekly</option><option>biweekly</option><option selected>monthly</option><option>yearly</option></select>
+    <input name="anchor" placeholder="Mon / 1-31"><button class="primary" type="submit">Set</button></form></div>
+  <ul id="recList" class="list ultra group"></ul>
+</section>
+<section id="settings" class="screen" aria-label="Settings"><div class="group">
+  <div class="mini"><label>Light theme</label><input id="themeToggle" type="checkbox" role="switch"></div>
+  <div class="mini"><button id="exportBtn" type="button">Export JSON</button><button id="importBtn" type="button">Import JSON</button></div>
+  <div class="mini"><button id="exportCsvBtn" type="button">Export CSV</button><button id="importCsvBtn" type="button">Import CSV</button></div>
+  <div class="mini"><button id="resetBtn" type="button" class="danger">Reset All</button></div>
+  <textarea id="ioArea" placeholder="Paste JSON or CSV here…" rows="4"></textarea></div></section>
+</main>
+<datalist id="catList"><option value="🍔 Food"></option><option value="⛽ Gas"></option><option value="💡 Utilities"></option><option value="🏠 Rent"></option>
+<option value="🛒 Groceries"></option><option value="☕ Coffee"></option><option value="🚗 Car"></option><option value="📱 Phone"></option>
+<option value="🎬 Entertainment"></option><option value="💊 Health"></option><option value="🚕 Transport"></option><option value="✈️ Travel"></option>
+<option value="📚 Education"></option><option value="💸 Other"></option></datalist>
+<nav class="tabbar" role="navigation" aria-label="Tabs">
+  <button data-screen="home" class="active" type="button">🏠<span>Home</span></button>
+  <button data-screen="add" type="button">➕<span>Add</span></button>
+  <button data-screen="ledger" type="button">📜<span>Ledger</span></button>
+  <button data-screen="budgets" type="button">💵<span>Budgets</span></button>
+  <button data-screen="stats" type="button">📈<span>Stats</span></button>
+  <button data-screen="recurring" type="button">⏱️<span>Repeat</span></button>
+  <button data-screen="settings" type="button">⚙️<span>Settings</span></button>
+</nav>
+<script defer src="app.js"></script></body></html>
